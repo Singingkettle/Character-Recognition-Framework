@@ -1,0 +1,112 @@
+OUTPUT_DIR: '/home/citybuster/Projects/CRNN_STN_SEQ/output'
+LOG_DIR: '/home/citybuster/Projects/CRNN_STN_SEQ/log'
+DATA_DIR: '/home/citybuster/Data/TFRecord/mjsynth'
+GPUS: '0'
+CHAR_DICT: '/home/citybuster/Projects/CRNN_STN_SEQ/data/char_dict/char_dict_en.json'
+ORD_MAP_DICT: '/home/citybuster/Projects/CRNN_STN_SEQ/data/char_dict/ord_map_en.json'
+PRINT_FREQ: 100
+USE_STN: false
+DECODER_MODEL: 'reverse_sts'
+MODEL_SAVE_DIR: ''
+RESUME_PATH: ''
+
+MODEL:
+  NAME: 'TextRecognition'
+  PRETRAINED: ''
+DATASET:
+  NAME: 'mjsynth'
+  NUM_CLASSES: 38
+  SEQ_LENGTH: 25
+STN:
+  IH: 64
+  IW: 256
+  ILH: 32
+  ILW: 64
+  OH: 32
+  OW: 100
+  MX: 0
+  MY: 0
+  IB: 'sine'
+  CONVR: 'l2_regularizer'
+  CONVI: 'variance_scaling_initializer'
+  CBND: 0.99
+  FCR: 'l2_regularizer'
+  FCI: 'variance_scaling_initializer'
+  FCBND: 0.99
+  SUMMARY_ACTIVATION: true
+ENCODER:
+  NETWORKTYPE: 'shadow'
+  HIDDEN_UNITS: 256
+  HIDDEN_LAYERS: 2
+  IW: 100
+  IH: 32
+  INPUT_CHANNELS: 3
+  SUMMARY_ACTIVATION: true
+DECODER_CTC:
+  BW: 5
+DECODER_STS:
+  REVERSE: false
+  NU: 256
+  FB: 1.0
+  I: 'orthogonal_initializer'
+  TM: 0.0
+  TS: 1.0
+  OG: 0.0
+  OS: 0.0
+  UMI: 0.0
+  UMA: 1.0
+  R: 'l2_regularizer'
+  L1W: 0.0001
+  L2W: 0.0001
+  SYNC: true
+  BW: 5
+  MNS: 30
+TRAIN:
+  EARLY_STOPPING: false
+  PATIENCE_EPOCHS: 6
+  PATIENCE_DELTA: 1e-3
+  EPOCHS: 2000000
+  DISPLAY_STEP: 10
+  GPU_MEMORY_FRACTION: 0.5
+  TF_ALLOW_GROWTH: true
+  BATCH_SIZE: 32
+  VAL_BATCH_SIZE: 32
+  CPU_MULTI_PROCESS_NUMS: 6
+  VAL_DISPLAY_STEP: 1000
+  OPTIMIZER: 'momentum_optimizer'
+  USE_MOVING_AVERAGE: false
+  MOVING_AVERAGE_DECAY: 0.9999
+  DECODE: true
+RMSProp_OPTIMIZER:
+  DECAY: 0.9
+  MOMENTUM: 0.9
+  LEARNING_RATE_TYPE: 'exponential_decay_learning_rate'
+  EPSILON: 1.0
+Momentum_OPTIMIZER:
+  MOMENTUM: 0.9
+  LEARNING_RATE_TYPE: 'exponential_decay_learning_rate'
+Nadam_OPTIMIZER:
+  LEARNING_RATE_TYPE: 'exponential_decay_learning_rate'
+Adadelta_OPTIMIZER:
+  LEARNING_RATE_TYPE: 'exponential_decay_learning_rate'
+  RHO: 0.95
+LRC:
+  LEARNING_RATE: 0.01
+LRE:
+  LEARNING_RATE: 0.01
+  DECAY_STEPS: 500000
+  DECAY_RATE: 0.1
+  STAIRCASE: True
+LRM:
+  LEARNING_RATE: 0.01
+  DECAY_STEPS: [600000, 800000, 100000]
+  LEARNING_RATES: [0.1, 0.01, 0.001]
+TEST:
+  GPU_MEMORY_FRACTION: 0.6
+  TF_ALLOW_GROWTH: True
+  BATCH_SIZE: 32
+
+
+
+
+
